@@ -110,6 +110,45 @@ def handle(update):
 					bot.sendMessage(uid, "🤖 *Bot :* _Maaf kamu sedang tidak dalam obrolan\nSilahkan Klik /refresh atau /search pada bot_", parse_mode="MarkDown",reply_markup=news, reply_to_message_id=update['message_id'])
 		
 
+		if text == "/test":
+			if not uid in queue["occupied"]:
+				lolt = ReplyKeyboardMarkup(keyboard=[
+                    ['Plain text', KeyboardButton(text='Text only')],
+					[dict(text='Nomor', request_contact=True), KeyboardButton(text='Lokasi', request_location=True)]], resize_keyboard=True)
+				bot.sendMessage(uid, "🤖 *Bot :* Contoh", parse_mode="MarkDown", reply_markup=lolt)
+
+		elif text == "Pengguna 👤":
+			file = json.loads(open("app.json", "r").read())
+			text = "Pengguna Online Saat Ini : " + str(len(file)) + " Online 👤"
+			bot.sendMessage(uid, text)
+
+		elif text == "/user":
+			if str(uid) in ADMIN :
+				file = open("app.json", "r")
+				text = "Pengguna : " + str(len(file.readlines())) + " Online 👤"
+				bot.sendMessage(uid, text)
+			else:
+				bot.sendMessage(uid, "🤖 *Bot :* 👮 Perintah ini hanya untuk admin", parse_mode="MarkDown")
+		elif text == 'Info Profile 📌':
+			if str(uid) in ADMIN :
+				name = update["from"]["first_name"]
+				_id = update["from"]["id"]
+				username = update["from"]["username"]
+				tipe = update["chat"]["type"]
+				date1 = datetime.fromtimestamp(update["date"], tz=pytz.timezone("asia/jakarta")).strftime("%d/%m/%Y %H:%M:%S").split()
+				text = "*Nama : " + str(name)+"*" +"\n"
+				text += "*ID Kamu :* " +"`"+ str(_id) +"`"+"\n"
+				text += f"*Username :* @{username}"+ "\n"
+				text += "*Tipe Chat* : " +"_"+ str(tipe)+"_" +"\n"
+				text += "*Tanggal :* " + str(date1[0]) +"\n"
+				text += "*Waktu :* " + str(date1[1]) + " WIB" "\n"
+				bot.sendMessage(uid, text, parse_mode='MarkDown', reply_to_message_id=update['message_id'])
+			else:
+				bahasa = update["from"]["language_code"]
+				name = update["from"]["first_name"]
+				_id = update["from"]["id"]
+				bot.sendMessage(uid, f"*Info Profile* 📌\n\n*Nama Kamu :* {name}\n*ID Kamu :* `{_id}`\n*Bahasa : {bahasa}*", parse_mode="MarkDown")
+
 		elif text == 'Search 🔍' or text == "/search":
 			if not uid in queue["occupied"]:
 				keyboard = ReplyKeyboardRemove()
@@ -124,13 +163,19 @@ def handle(update):
 			bot.sendMessage(queue["occupied"][uid], "🤖 *Bot :* ❌ _Lawan ngobrol keluar dari obrolan_", parse_mode='MarkDown', reply_markup=keyboard)
 			del queue["occupied"][queue["occupied"][uid]]
 			del queue["occupied"][uid]
-	
+
+		elif text == '🛠 Menu Bot 🛠':
+			keyboard = ReplyKeyboardMarkup(keyboard=[
+				['Info Profile 📌'],['🔙 Main Menu']
+			], resize_keyboard=True, one_time_keyboard=True)
+			bot.sendMessage(uid, f"🛠 *Menu Bot*\n\n_Hai Kalian Kami Menyediakan Menu Bot Yang Bikin Kalian Senang , Gabung Group Support Kami Agar Kami Meng Update Fitur Lebih Keren Lagi_\n\n*Group Support :* [SUPPORT](https://t.me/{GROUP_SUPPORT})",parse_mode='MarkDown', reply_markup=keyboard)
+			
 		elif text == '🔙 Main Menu':
 			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍']], resize_keyboard=True, one_time_keyboard=True)
 			bot.sendMessage(uid, "_🔄 Kembali_", parse_mode='MarkDown', disable_web_page_preview=True, reply_markup=keyboard)
 		elif text == "Next ▶️" or text == "/next" and uid in queue["occupied"]:
 			print('[SB] ' + str(uid) + ' meninggalkan obrolan dengan ' + str(queue["occupied"][uid]))
-			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍']], resize_keyboard=True, one_time_keyboard=True)
+			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍', '🔙 Main Menu']], resize_keyboard=True, one_time_keyboard=True)
 			bot.sendMessage(uid, "🤖 *Bot :* ❌ _Kamu keluar dari obrolan_",parse_mode="MarkDown")
 			bot.sendMessage(queue["occupied"][uid], "🤖 *Bot :* ❌ _Lawan ngobrol keluar dari obrolan_",parse_mode="MarkDown", reply_markup=keyboard)
 			del queue["occupied"][queue["occupied"][uid]]
