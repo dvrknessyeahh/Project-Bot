@@ -105,7 +105,7 @@ def handle(update):
 				bot.sendMessage(uid, f"👋🏻 Hai , Selamat Datang Di {PROJECT_NAME} \n\n_💬 untuk mencari teman obrolan gunakan perintah /search pada bot_\n\n*Selamat Mencari!* 🥳", parse_mode='MarkDown', disable_web_page_preview=True , reply_markup=keyboard)
 		if 'message_id' in update:
 			if not uid in queue["occupied"]:
-				if text != "/start" and text != "Pengguna 👤" and text !="Next ▶️" and text != "/refresh" and text != "/test" and text != "/search" and text != "Search 🔍" and text != "🛠 Menu Bot" and text != "🔙 Main Menu" and text != "Info Profile 📌" and text != "📝 Info Covid-19"  and text != "/user":
+				if text != "/start" and text != "Pengguna 👤" and text !="Next ▶️" and text != "/refresh" and text != "/test" and text != "/search" and text != "Search 🔍" and text != "🛠 Menu Bot 🛠" and text != "🔙 Main Menu" and text != "Info Profile 📌" and text != "📝 Info Covid-19"  and text != "/user":
 					news = ReplyKeyboardRemove()
 					bot.sendMessage(uid, "🤖 *Bot :* _Maaf kamu sedang tidak dalam obrolan\nSilahkan Klik /refresh atau /search pada bot_", parse_mode="MarkDown",reply_markup=news, reply_to_message_id=update['message_id'])
 		
@@ -158,20 +158,20 @@ def handle(update):
 
 		elif text == '❌ Exit' or text == '/exit' and uid in queue["occupied"]:
 			print('[SB] ' + str(uid) + ' meninggalkan obrolan ' + str(queue["occupied"][uid]))
-			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍'],['🛠 Menu Bot']], resize_keyboard=True, one_time_keyboard=True)
+			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍'],['🛠 Menu Bot 🛠']], resize_keyboard=True, one_time_keyboard=True)
 			bot.sendMessage(uid, "🤖 *Bot :* ❌ _Kamu keluar dari obrolan_", parse_mode='MarkDown', reply_markup=keyboard)
 			bot.sendMessage(queue["occupied"][uid], "🤖 *Bot :* ❌ _Lawan ngobrol keluar dari obrolan_", parse_mode='MarkDown', reply_markup=keyboard)
 			del queue["occupied"][queue["occupied"][uid]]
 			del queue["occupied"][uid]
 
-		elif text == '🛠 Menu Bot':
+		elif text == '🛠 Menu Bot 🛠':
 			keyboard = ReplyKeyboardMarkup(keyboard=[
 				['Info Profile 📌'],['🔙 Main Menu']
 			], resize_keyboard=True, one_time_keyboard=True)
 			bot.sendMessage(uid, f"🛠 *Menu Bot*\n\n_Hai Kalian Kami Menyediakan Menu Bot Yang Bikin Kalian Senang , Gabung Group Support Kami Agar Kami Meng Update Fitur Lebih Keren Lagi_\n\n*Group Support :* [SUPPORT](https://t.me/{GROUP_SUPPORT})",parse_mode='MarkDown', reply_markup=keyboard)
 			
 		elif text == '🔙 Main Menu':
-			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍'],['🛠 Menu Bot']], resize_keyboard=True, one_time_keyboard=True)
+			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍'],['🛠 Menu Bot 🛠']], resize_keyboard=True, one_time_keyboard=True)
 			bot.sendMessage(uid, "_🔄 Kembali_", parse_mode='MarkDown', disable_web_page_preview=True, reply_markup=keyboard)
 		elif text == "Next ▶️" or text == "/next" and uid in queue["occupied"]:
 			print('[SB] ' + str(uid) + ' meninggalkan obrolan dengan ' + str(queue["occupied"][uid]))
