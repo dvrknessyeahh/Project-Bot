@@ -158,7 +158,7 @@ def handle(update):
 
 		elif text == '❌ Exit' or text == '/exit' and uid in queue["occupied"]:
 			print('[SB] ' + str(uid) + ' meninggalkan obrolan ' + str(queue["occupied"][uid]))
-			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍'],['Pengguna 👤','🛠 Menu Bot']], resize_keyboard=True, one_time_keyboard=True)
+			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍'],['🛠 Menu Bot']], resize_keyboard=True, one_time_keyboard=True)
 			bot.sendMessage(uid, "🤖 *Bot :* ❌ _Kamu keluar dari obrolan_", parse_mode='MarkDown', reply_markup=keyboard)
 			bot.sendMessage(queue["occupied"][uid], "🤖 *Bot :* ❌ _Lawan ngobrol keluar dari obrolan_", parse_mode='MarkDown', reply_markup=keyboard)
 			del queue["occupied"][queue["occupied"][uid]]
@@ -166,19 +166,12 @@ def handle(update):
 
 		elif text == '🛠 Menu Bot':
 			keyboard = ReplyKeyboardMarkup(keyboard=[
-				['Info Profile 📌','📝 Info Covid-19'],['🔙 Main Menu']
+				['Info Profile 📌'],['🔙 Main Menu']
 			], resize_keyboard=True, one_time_keyboard=True)
 			bot.sendMessage(uid, f"🛠 *Menu Bot*\n\n_Hai Kalian Kami Menyediakan Menu Bot Yang Bikin Kalian Senang , Gabung Group Support Kami Agar Kami Meng Update Fitur Lebih Keren Lagi_\n\n*Group Support :* [SUPPORT](https://t.me/{GROUP_SUPPORT})",parse_mode='MarkDown', reply_markup=keyboard)
-
-		elif text == '📝 Info Covid-19':
-			web = requests.get('https://www.worldometers.info/coronavirus/country/indonesia/')
-			tampilan = BeautifulSoup(web.content, 'html.parser')
-			dataweb = tampilan.find_all("div", {"class": "maincounter-number"})
-			ouy = "*INFO KASUS VIRUS COVID-19 DI INDONESIA 🇮🇩*\n\n😷 Terpapar Virus : {} jiwa\n😵 Orang Meninggal : {} jiwa\n😇 Orang Sembuh : {} jiwa\n\n_Untuk Kalian Stay Safe Ya , Jaga Kesehatan Masing Masing!_\n\n*Salam Admin!*".format(dataweb[0].span.text,dataweb[1].span.text,dataweb[2].span.text)
-			bot.sendMessage(uid, ouy, parse_mode='MarkDown')
 			
 		elif text == '🔙 Main Menu':
-			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍'],['Pengguna 👤','🛠 Menu Bot']], resize_keyboard=True, one_time_keyboard=True)
+			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍'],['🛠 Menu Bot']], resize_keyboard=True, one_time_keyboard=True)
 			bot.sendMessage(uid, "_🔄 Kembali_", parse_mode='MarkDown', disable_web_page_preview=True, reply_markup=keyboard)
 		elif text == "Next ▶️" or text == "/next" and uid in queue["occupied"]:
 			print('[SB] ' + str(uid) + ' meninggalkan obrolan dengan ' + str(queue["occupied"][uid]))
@@ -205,7 +198,7 @@ def handle(update):
 			partner = random.choice(exList(queue["free"], uid))
 			if partner != uid:
 				keyboard = ReplyKeyboardMarkup(keyboard=[
-					["👋🏻"],['Next ▶️', '❌ Exit'],[dict(text='Bagikan Nomor', request_contact=True)],[dict(text='Bagikan Lokasi', request_location=True)]
+					["👋🏻"],['Next ▶️', '❌ Exit']
 				],resize_keyboard=True, one_time_keyboard=True)
 				print('[SB] ' + str(uid) + ' Bergabung dengan ' + str(partner))
 				queue["free"].remove(partner)
