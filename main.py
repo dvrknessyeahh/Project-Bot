@@ -175,7 +175,7 @@ def handle(update):
 			bot.sendMessage(uid, "_🔄 Kembali_", parse_mode='MarkDown', disable_web_page_preview=True, reply_markup=keyboard)
 		elif text == "Next ▶️" or text == "/next" and uid in queue["occupied"]:
 			print('[SB] ' + str(uid) + ' meninggalkan obrolan dengan ' + str(queue["occupied"][uid]))
-			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍', '🔙 Main Menu']], resize_keyboard=True, one_time_keyboard=True)
+			keyboard = ReplyKeyboardMarkup(keyboard=[['Search 🔍']], resize_keyboard=True, one_time_keyboard=True)
 			bot.sendMessage(uid, "🤖 *Bot :* ❌ _Kamu keluar dari obrolan_",parse_mode="MarkDown")
 			bot.sendMessage(queue["occupied"][uid], "🤖 *Bot :* ❌ _Lawan ngobrol keluar dari obrolan_",parse_mode="MarkDown", reply_markup=keyboard)
 			del queue["occupied"][queue["occupied"][uid]]
