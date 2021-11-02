@@ -1,7 +1,7 @@
 {
   "name": "Project-Bot",
   "description": "Bot anonymous chat telegram.",
-  "repository": "https://github.com/apisuserbot/Project-Bot",
+  "repository": "https://github.com/dvrknessyeahh/Project-Bot",
   "logo": "https://telegra.ph/file/f9edcf0f82516206171d9.jpg",
   "keywords": ["Project-Bot", "telegram", "python"],
   "env": {
@@ -28,27 +28,27 @@
     "DONASI": {
       "description": "Isi link donasi kalian tanpa tanpa harus 'https://' Contoh (saweria.co/DonasiDeveloper)",
       "required": false,
-      "value": "saweria.co/DonasiDeveloper"
+      "value": ""
     },
     "GROUP_SUPPORT": {
       "description": "Bikin Sebuah Group Support Untuk Chat Tanpa Harus Menggunakan @ (kalo gak di rubah gapapa)",
       "required": false,
-      "value": "project_to_chat"
+      "value": ""
     },
     "GROUP_CHAT": {
       "description": "Isi dengan username group kalian tanpa tanda @ (kalo gak di rubah gapapa)",
       "required": false,
-      "value": "Cari_Teman_Online_Group"
+      "value": ""
     },
     "PROJECT_NAME": {
       "description": "Isi dengan nama project bot kalian",
       "required": false,
-      "value": "PROJECT BOT"
+      "value": ""
     },
     "CHANNEL": {
       "description": "Isi dengan username channel kalian tanpa tanda @ (kalo gak di rubah gapapa)",
       "required": false,
-      "value": "Quotes_Channel_Official"
+      "value": ""
     }
   }
 }
